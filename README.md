@@ -1,6 +1,11 @@
 # MailFlow — Email Outreach Campaign Platform
 
+[![CI & Live Demo Deploy](https://github.com/OmiOjha/mailflow-outreach/actions/workflows/ci-deploy.yml/badge.svg)](https://github.com/OmiOjha/mailflow-outreach/actions/workflows/ci-deploy.yml)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Online-emerald?style=flat&logo=safari)](https://omiojha.github.io/mailflow-outreach/)
+
 Full-stack email outreach platform to create campaigns, import leads via CSV, and schedule multi-step email sequences with per-lead status tracking.
+
+🚀 **Live Interactive Demo**: [https://omiojha.github.io/mailflow-outreach/](https://omiojha.github.io/mailflow-outreach/)
 
 Built with **TypeScript**, **Node.js**, **Express**, **MySQL**, **Redis**, **React**, and **Tailwind CSS**.
 
