@@ -53,7 +53,11 @@ app.use(errorHandler);
 // ---- Start ----
 async function start() {
   try {
-    await testConnection();
+    try {
+      await testConnection();
+    } catch (err: any) {
+      console.warn('⚠️  MySQL not reachable yet (start MySQL or Docker to enable persistence):', err.message);
+    }
 
     app.listen(env.port, () => {
       console.log(`\n🚀 MailFlow API running on http://localhost:${env.port}`);
