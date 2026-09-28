@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Mailbox } from '../types';
-import { Mail, ShieldCheck, Plus, CheckCircle, Zap } from 'lucide-react';
+import { Mail, ShieldCheck, Plus, Zap } from 'lucide-react';
 
 interface MailboxSettingsProps {
   mailboxes: Mailbox[];

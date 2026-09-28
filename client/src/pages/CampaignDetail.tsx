@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Campaign, CampaignStep, Lead, Analytics } from '../types';
 import { SequenceBuilder } from '../components/SequenceBuilder';
 import { LeadManager } from '../components/LeadManager';
-import { ArrowLeft, Rocket, Layers, Users, BarChart3, Clock, CheckCircle2, TrendingUp } from 'lucide-react';
+import { ArrowLeft, Rocket, Layers, Users, BarChart3, CheckCircle2, TrendingUp } from 'lucide-react';
 
 interface CampaignDetailProps {
   campaign: Campaign;

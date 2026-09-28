@@ -1,7 +1,7 @@
 import React from 'react';
 import { Campaign, Analytics } from '../types';
 import { StatsCard } from '../components/StatsCard';
-import { Users, Send, Eye, MousePointerClick, AlertTriangle, ArrowRight, Play, CheckCircle } from 'lucide-react';
+import { Users, Send, Eye, MousePointerClick, AlertTriangle, ArrowRight } from 'lucide-react';
 
 interface DashboardProps {
   campaigns: Campaign[];

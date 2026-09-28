@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CampaignStep } from '../types';
-import { Clock, Plus, Trash2, Sparkles, HelpCircle } from 'lucide-react';
+import { Clock, Plus } from 'lucide-react';
 
 interface SequenceBuilderProps {
   steps: CampaignStep[];

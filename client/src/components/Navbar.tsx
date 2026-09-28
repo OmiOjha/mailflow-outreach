@@ -1,5 +1,5 @@
 import React from 'react';
-import { Send, BarChart3, Inbox, Layers, Settings, ExternalLink } from 'lucide-react';
+import { Send, BarChart3, Inbox, Layers, ExternalLink } from 'lucide-react';
 
 interface NavbarProps {
   currentTab: string;

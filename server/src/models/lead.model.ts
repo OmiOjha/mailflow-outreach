@@ -39,12 +39,12 @@ export const LeadModel = {
            VALUES (?, ?, ?, ?, ?, ?)`,
           [
             campaignId,
-            lead.email,
+            lead.email || '',
             lead.first_name || null,
             lead.last_name || null,
             lead.company || null,
             lead.custom_fields ? JSON.stringify(lead.custom_fields) : null,
-          ]
+          ] as any[]
         );
         inserted++;
       } catch (err: any) {
