@@ -1,0 +1,99 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mailflow-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mailflow
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: mailflow-redis
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: mailflow-api
+    restart: always
+    environment:
+      PORT: 3001
+      NODE_ENV: production
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: rootpassword
+      DB_NAME: mailflow
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: supersecretproductionkey_change_me
+      JWT_REFRESH_SECRET: supersecretrefreshkey_change_me
+      CLIENT_URL: http://localhost:5173
+      TRACKING_BASE_URL: http://localhost:3001
+    ports:
+      - '3001:3001'
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    command: npm run worker:prod
+    container_name: mailflow-worker
+    restart: always
+    environment:
+      NODE_ENV: production
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: rootpassword
+      DB_NAME: mailflow
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      TRACKING_BASE_URL: http://localhost:3001
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: mailflow-client
+    restart: always
+    ports:
+      - '5173:80'
+    depends_on:
+      - api
+
+volumes:
+  mysql_data:
+  redis_data:
